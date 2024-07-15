@@ -37,23 +37,31 @@
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Add Task</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <form id="content">
+            <div class="container">
+            <div class ="row">
             <div>
-              <label for="username">Task Title:</label><br>
+              <label for="title">Task Title:</label><br>
               <input type="text" id="title" name="title" placeholder="Task Title" required>
             </div><br>
             <div>
               <label for="title">Due Date:</label><br>
               <input type="text" id="dueDate" name="dueDate" placeholder="Due Date" required>
+            </div>
+            </div>
             </div><br>
+            <div class="container">
             <div>
               <label for="description">Task Description</label><br>
               <textarea id="description" rows="5" cols="30" name="description" placeholder="Task Description" required></textarea>
+            </div>
             </div><br><br>
-              <input type="submit" value="Submit">
+            <div class="text-center mb-5">
+              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
+            </div>
           </form>
           </div>
         </div>
