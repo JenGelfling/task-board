@@ -1,20 +1,62 @@
 // Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks")) || [];
 let nextId = JSON.parse(localStorage.getItem("nextId")) || [];
-const submitBtn = document.querySelector ("#submit-button");
-let taskId = 
+// const submitBtn = document.querySelector ("#submit-button");
+let formContent = document.querySelector("#content")
 
-function readProjectsFromStorage(tasks){
-    // taskList = localStorage.getItem("tasks");
-    // localStorage.getItem(nextId);
+// Event listener for form submit button
+formContent.addEventListener('submit', handleFormSubmit)
 
-    return JSON.parse(localStorage.getItem("tasks")) || []
+// function to push new task from form to array in local storage
+function handleFormSubmit(e){
+    e.preventDefault()
+  
+    let title = document.querySelector('#title').value
+    let dueDate = document.querySelector('#dueDate').value
+    let description = document.querySelector('#description').value
+    let task = {title, dueDate, description}
+  
+    taskList.push(task)
+    localStorage.setItem('tasks', JSON.stringify(taskList))
+
+  }
+// let taskId = 
+
+/*
+let formContent = document.querySelector("#content")
+
+formContent.addEventListener('submit', handleFormSubmit)
+
+let blogArr = JSON.parse(localStorage.getItem("post")) || []
+
+function handleFormSubmit(event){
+  event.preventDefault()
+
+  let username = document.querySelector('#username').value
+  let title = document.querySelector('#title').value
+  let blog = document.querySelector('#blog').value
+  let post = {username, title, blog}
+
+  blogArr.push(post)
+  localStorage.setItem('post', JSON.stringify(blogArr))
+
+  redirect()
 }
 
-function saveProjectToStorage(tasks){
-    localStorage.setItem('tasks', JSON.stringify(taskList));
-    console.log(task);
+function redirect(){
+    window.location.href="./blog.html";
 }
+
+*/
+
+// function readProjectsFromStorage(tasks){
+//     JSON.parse(localStorage.getItem("tasks")) || []
+// }
+
+// function saveProjectToStorage(tasks){
+//     localStorage.setItem('tasks', JSON.stringify(tasks));
+//     console.log(task);
+// }
 
 // Todo: create a function to generate a unique task id
 function generateTaskId(e) {

@@ -26,10 +26,6 @@
     </div>
     <!-- Todo: Create a modal with a form to add tasks -->
 
-    <!--  -->
-
-    <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
-
     <!-- Modal -->
     <div id="formModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -58,13 +54,13 @@
               </div>
             </div><br>
             <div class="container">
-            <div>
-              <label for="description">Task Description</label><br>
-              <textarea id="description" rows="5" cols="30" name="description" placeholder="Task Description" required></textarea>
-            </div>
+              <div>
+                <label for="description">Task Description</label><br>
+                <textarea id="description" rows="5" cols="30" name="description" placeholder="Task Description" required></textarea>
+              </div>
             </div><br><br>
             <div class="text-center mb-5">
-              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
+              <button class="btn btn-success" id="submit-button" data-bs-toggle="modal" data-bs-target="#formModal" click>Add Task</button>
             </div>
           </form>
           </div>
