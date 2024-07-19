@@ -3,16 +3,22 @@
 // let projectList = JSON.parse(localStorage.getItem("projects")) || [];
 // let nextId = JSON.parse(localStorage.getItem("nextId")) || [];
 // const submitBtn = document.querySelector ("#submit-button");
-const formContent = $("#modal-form-content");
+const projectDisplayEl = $('#project-display');
+const projectFormEl = $('#project-form');
 const projectNameInputEl = $('#project-name-input');
 const projectTypeInputEl = $('#project-type-input');
-const projectDateInputEl = $('#dueDate');
+const projectDateInputEl = $('#taskDueDate');
 
 function readProjectsFromStorage() {
   
   // TODO: Retrieve projects from localStorage and parse the JSON to an array. If there are no projects in localStorage, initialize an empty array and return it.
 
-  let projects = JSON.parse(localStorage.getItem('projects')) || [];
+  let projects = JSON.parse(localStorage.getItem('projects'));
+
+  // ? If no projects were retrieved from localStorage, assign projects to a new empty array to push to later.
+  if (!projects) {
+    projects = [];
+  }
   return projects;
 }
 
@@ -25,21 +31,22 @@ function saveProjectsToStorage(projects){
 function createProjectCard(project) {
 
   // TODO: Create a new card element and add the classes `card`, `project-card`, `draggable`, and `my-3`. Also add a `data-project-id` attribute and set it to the project id.
-  const taskCard = $("<div>").addClass('card project-card draggable my-3').attr('data-project-id', project.id);
+  const taskCard = $('<div>').addClass('card project-card draggable my-3').attr('data-project-id', project.id);
 
   // TODO: Create a new card header element and add the classes `card-header` and `h4`. Also set the text of the card header to the project name.
-  const cardHeader = $("<h4>").addClass('card-header').text(project.title);
+  const cardHeader = $('<div>').addClass('card-header h4').text(project.name);
 
   // TODO: Create a new card body element and add the class `card-body`.
-  const cardBody = $("<body>").addClass('card-body');
+  const cardBody = $('<body>').addClass('card-body');
 
   // TODO: Create a new paragraph element and add the class `card-text`. Also set the text of the paragraph to the project type.
-  const cardDescription = $("<p>").addClass('card-text').text(project.description);
+  const cardDescription = $('<p>').addClass('card-text').text(project.description);
 
   // TODO: Create a new paragraph element and add the class `card-text`. Also set the text of the paragraph to the project due date.
   const cardDueDate = $("<p>").addClass('card-text').text(project.dueDate);
   // TODO: Create a new button element and add the classes `btn`, `btn-danger`, and `delete`. Also set the text of the button to "Delete" and add a `data-project-id` attribute and set it to the project id.
-  const cardDeleteBtn = $("<button>").addClass('btn btn-danger delete').text("Delete").addAttr('data-project-id', project.id);
+  const cardDeleteBtn = $("<button>").addClass('btn btn-danger delete').text("Delete").attr('data-project-id', project.id);
+
   cardDeleteBtn.on('click', handleDeleteProject);
   
 
@@ -58,9 +65,9 @@ function createProjectCard(project) {
   }
 
   // TODO: Append the card description, card due date, and card delete button to the card body.
-    cardBody.append(cardDescription, cardDueDate, cardDeleteBtn)
+    cardBody.append(cardDescription, cardDueDate, cardDeleteBtn);
   // TODO: Append the card header and card body to the card.
-    taskCard.append(cardHeader, cardBody)
+    taskCard.append(cardHeader, cardBody);
   // ? Return the card so it can be appended to the correct lane.
   return taskCard;
 }
@@ -130,11 +137,11 @@ function handleDeleteProject() {
 
 
 // function to push new task from form to array in local storage
-function handleFormSubmit(){
-    // e.preventDefault(e);
-    const projectName = projectNameInputEl.val();
-    const projectType = projectTypeInputEl.val(); // don't need to trim select input
-    const projectDate = projectDateInputEl.val(); // yyyy-mm-dd format
+function handleFormSubmit(event){
+    event.preventDefault();
+    const projectName = projectNameInputEl.value;
+    const projectType = projectTypeInputEl.value; // don't need to trim select input
+    const projectDate = projectDateInputEl.value; // yyyy-mm-dd format
 
 
     const newProject = {
@@ -157,9 +164,9 @@ function handleFormSubmit(){
     printProjectData();
 
     // ? Clear the form inputs
-    projectNameInputEl.val('');
-    projectTypeInputEl.val('');
-    projectDateInputEl.val('');
+    // projectNameInputEl.value('');
+    // projectTypeInputEl.value('');
+    // projectDateInputEl.value('');
 
     // let title = document.querySelector('#title').value
     // let dueDate = document.querySelector('#dueDate').value
@@ -195,7 +202,7 @@ function handleDrop(event, ui) {
 }
 
 // ? Add event listener to the form element, listen for a submit event, and call the `handleProjectFormSubmit` function.
-formContent.on('submit', handleFormSubmit());
+projectFormEl.on('submit', handleFormSubmit);
 
 // ? Because the cards are dynamically added to the screen, we have to use jQuery event delegation to listen for clicks on the added cards delete button.
 // ? We listen for a click on the parent element, and THEN check if the target of the click is the delete button. If it is, we call the `handleDeleteProject` function
@@ -247,11 +254,11 @@ projectDisplayEl.on('click', '.btn-delete-project', handleDeleteProject);
 // }
 
 // Todo: create a function to handle deleting a task
-function handleDeleteProject(event){
+// function handleDeleteProject(event){
 
-}
+// }
 // TODO: Add an event listener to listen for the delete buttons. Use event delegation to call the `handleDeleteProject` function.
-projectDisplayEl.on('click', '.btn-delete-project', handleDeleteProject);
+// projectDisplayEl.on('click', '.btn-delete-project', handleDeleteProject);
 
 
 // Todo: create a function to handle dropping a task into a new status lane
@@ -271,7 +278,7 @@ $(document).ready(function () {
     // ? Print project data to the screen on page load if there is any
     printProjectData();
   
-    $('#dueDate').datepicker({
+    $('#taskDueDate').datepicker({
       changeMonth: true,
       changeYear: true,
     });
