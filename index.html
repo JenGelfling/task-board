@@ -36,19 +36,19 @@
             <h4 class="modal-title">Add Task</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form id="content">
+          <form id="modal-form-content">
             <div class="container">
               <div class ="row">
                 <div class="col-sm-6">
                   <div>
                     <label for="title">Task Title:</label><br>
-                    <input type="text" id="title" name="title" placeholder="Task Title" required>
+                    <input type="text" id="title" name="title" placeholder="Task Title">
                   </div>
                 </div>
                 <div class="col-sm-6">
-                  <div>
-                    <label for="title">Due Date:</label><br>
-                    <input type="text" id="dueDate" name="dueDate" placeholder="Due Date" required>
+                  <div> 
+                    <label for="dueDate">Due Date:</label><br>
+                    <input placeholder="Task Due Date" autocomplete="off" type="date" class="form-control mb-3 hasDatepicker" id="dueDate" name="dueDate">
                   </div>
                 </div>
               </div>
@@ -56,11 +56,11 @@
             <div class="container">
               <div>
                 <label for="description">Task Description</label><br>
-                <textarea id="description" rows="5" cols="30" name="description" placeholder="Task Description" required></textarea>
+                <textarea id="description" rows="5" cols="30" name="description" placeholder="Task Description"></textarea>
               </div>
             </div><br><br>
             <div class="text-center mb-5">
-              <button class="btn btn-success" id="submit-button" data-bs-toggle="modal" data-bs-target="#formModal" click>Add Task</button>
+              <button type="submit" class="btn btn-success click" id="submit-button"  data-bs-target="#formModal" data-bs-toggle="modal" onclick="handleFormSubmit()">Add Task!!</button>
             </div>
           </form>
           </div>
