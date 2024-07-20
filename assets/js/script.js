@@ -34,10 +34,10 @@ function createProjectCard(project) {
   const taskCard = $('<div>').addClass('card project-card draggable my-3').attr('data-project-id', project.id);
 
   // TODO: Create a new card header element and add the classes `card-header` and `h4`. Also set the text of the card header to the project name.
-  const cardHeader = $('<header>').addClass('card-header h4').text(project.name);
+  const cardHeader = $('<div>').addClass('card-header h4').text(project.name);
 
   // TODO: Create a new card body element and add the class `card-body`.
-  const cardBody = $('<body>').addClass('card-body');
+  const cardBody = $('<div>').addClass('card-body');
 
   // TODO: Create a new paragraph element and add the class `card-text`. Also set the text of the paragraph to the project type.
   const cardDescription = $('<p>').addClass('card-text').text(project.description);
