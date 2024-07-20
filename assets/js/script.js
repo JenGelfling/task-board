@@ -1,13 +1,9 @@
 
-// Retrieve tasks and nextId from localStorage
-// let projectList = JSON.parse(localStorage.getItem("projects")) || [];
-// let nextId = JSON.parse(localStorage.getItem("nextId")) || [];
-// const submitBtn = document.querySelector ("#submit-button");
 const projectDisplayEl = $('#project-display');
 const projectFormEl = $('#project-form');
-const projectNameInputEl = $('#project-name-input');
-const projectDescriptionInputEl = $('#description');
-const projectDateInputEl = $('#taskDueDate');
+const projectNameInputEl = document.getElementById("title")
+const projectDescriptionInputEl = document.getElementById("description");
+const projectDateInputEl = document.getElementById("taskDueDate");
 
 function readProjectsFromStorage() {
   
@@ -43,7 +39,7 @@ function createProjectCard(project) {
   const cardDescription = $('<p>').addClass('card-text').text(project.description);
 
   // TODO: Create a new paragraph element and add the class `card-text`. Also set the text of the paragraph to the project due date.
-  const cardDueDate = $('<p>').addClass('card-text').text(project.dueDate);
+  const cardDueDate = $('<p>').addClass('card-text').text(dayjs(project.dueDate).format('MM/DD/YYYY'));
   // TODO: Create a new button element and add the classes `btn`, `btn-danger`, and `delete`. Also set the text of the button to "Delete" and add a `data-project-id` attribute and set it to the project id.
   const cardDeleteBtn = $("<button>").addClass('btn btn-danger delete').text("Delete").attr('data-project-id', project.id);
 
@@ -134,15 +130,14 @@ function handleDeleteProject() {
   printProjectData();
 }
 
-
-
 // function to push new task from form to array in local storage
 function handleFormSubmit(event){
     event.preventDefault();
     const projectName = projectNameInputEl.value;
-    const projectDescription = projectDescriptionInputEl.value; // don't need to trim select input
-    const projectDate = projectDateInputEl.value; // yyyy-mm-dd format
-
+    const projectDescription = projectDescriptionInputEl.value;
+    const projectDate = projectDateInputEl.value;
+  
+    // const projectDate = projectDateInputEl.value; // yyyy-mm-dd format
 
     const newProject = {
       // ? Here we use a Web API called `crypto` to generate a random id for our project. This is a unique identifier that we can use to find the project in the array. `crypto` is a built-in module that we can use in the browser and Nodejs.    id: crypto.randomUUID(),
